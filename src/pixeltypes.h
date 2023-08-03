@@ -477,7 +477,7 @@ struct CRGB {
     }
 
     /// This allows testing a CRGB for zero-ness
-    inline operator bool() const __attribute__((always_inline))
+    inline explicit operator bool() const __attribute__((always_inline))
     {
         return r || g || b;
     }
@@ -831,6 +831,18 @@ inline __attribute__((always_inline)) bool operator== (const CRGB& lhs, const CR
 
 /// Check if two CRGB objects do *not* have the same color data
 inline __attribute__((always_inline)) bool operator!= (const CRGB& lhs, const CRGB& rhs)
+{
+    return !(lhs == rhs);
+}
+
+/// Check if two CHSV objects have the same color data
+inline __attribute__((always_inline)) bool operator== (const CHSV& lhs, const CHSV& rhs)
+{
+    return (lhs.h == rhs.h) && (lhs.s == rhs.s) && (lhs.v == rhs.v);
+}
+
+/// Check if two CHSV objects do *not* have the same color data
+inline __attribute__((always_inline)) bool operator!= (const CHSV& lhs, const CHSV& rhs)
 {
     return !(lhs == rhs);
 }
